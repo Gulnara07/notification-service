@@ -3,7 +3,6 @@ spring:
     name: notification-service
   config:
     import: configserver:http://config-service:8888
-  cloud:
-    config:
-      uri: http://config-service:8888
-      fail-fast: true
+
+server:
+  port: 8082

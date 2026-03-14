@@ -2,10 +2,13 @@ package com.example.notificationservice.controller;
 
 import com.example.notificationservice.dto.UserEventDto;
 import com.example.notificationservice.service.EmailService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/notifications")
+@Tag(name = "Notification API")
 public class NotificationController {
 
     private final EmailService emailService;
@@ -15,6 +18,7 @@ public class NotificationController {
     }
 
     @PostMapping("/send")
+    @Operation(summary = "Send notification")
     public String sendNotification(@RequestBody UserEventDto event) {
         String operation = event.getOperation();
         String email = event.getEmail();
@@ -31,6 +35,7 @@ public class NotificationController {
     }
 
     @PostMapping("/test")
+    @Operation(summary = "Send test email")
     public String testEmail(@RequestParam String email) {
         emailService.sendUserCreatedEmail(email);
         return "Тестовое письмо отправлено на " + email;
